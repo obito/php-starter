@@ -67,7 +67,7 @@ if (isConnected()) {
 
             $queryPrepared->execute(["email" => $email]);
 
-            if (!$queryPrepared->fetch()) {
+            if ($queryPrepared->fetch()) {
                 $errors[] = "E-mail existe déjà";
             }
         }
@@ -87,9 +87,6 @@ if (isConnected()) {
     if (strlen($pseudo) < 4 || strlen($pseudo) > 60) {
         $errors[] = "Le pseudo doit faire entre 4 et 60 caractères";
     }
-
-
-
 
 
     if (!empty($_POST["newPassword"]) && !empty($_POST["passwordConfirm"]) && !empty($_POST["oldPassword"])) {
