@@ -41,7 +41,6 @@ if (isConnected()) {
     $pdo = connectDB();
 
 
-    //Vérification l'unicité de l'email
     $queryPrepared = $pdo->prepare("SELECT * from iw_user WHERE id=:id");
 
     $queryPrepared->execute(["id" => $userId]);
@@ -68,7 +67,7 @@ if (isConnected()) {
 
             $queryPrepared->execute(["email" => $email]);
 
-            if (!empty($queryPrepared->fetch())) {
+            if (!$queryPrepared->fetch()) {
                 $errors[] = "E-mail existe déjà";
             }
         }
